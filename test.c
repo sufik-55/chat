@@ -22,13 +22,19 @@ struct  ssds {
 };
 
 char * str() {
-    char string[999999];
+    char string[] = "sufik";
     return string;
 }
 
 char * str2() {
     char *s;
-    s = (char *) malloc(999999);
+    s = (char *) malloc(6);
+   *(s+0) = 's';
+   *(s+1) = 'u';
+   *(s+2) = 'f';
+   *(s+3) = 'i';
+   *(s+4) = 'k';
+   *(s+5) = '\0';
     return s;
 }
 
@@ -145,10 +151,16 @@ int len = 1000;
 */
     //fun("/", 0);
     //fun2(".", 0);
-    char *s;
-    for (int i = 0; i < 1000000; i++ ) {
-        s = str2();
-        free(s);
+    char *s[10];
+    for (int i = 0; i < 10; i++ ) {
+        //s = str2();
+        s[i] = str();
+        //free(s);
+    }
+    s[0][0] = 'x';
+
+    for (int i = 0; i < 10; i++) {
+        printf("%s\n", s[i]);
     }
 
     getchar();
