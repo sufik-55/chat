@@ -208,9 +208,9 @@ char* my_fgets (char *__restrict__ __s, int __n, FILE *__restrict__ __stream) {
 
 
 int communication_client(void* clientDataVoid) {
-    printf("communication_client\n");
+    //printf("communication_client\n");
     struct client_data* clientData = clientDataVoid;
-    printf("Connected name: %s\n", clientData->nick_name);
+    printf("Подключение нового клиента\n");
 
     /*char mess[] = "Введите Nick Name:\n";
     //send(clientData->socket_id, mess, sizeof(mess), 0);
@@ -283,9 +283,9 @@ int communication_client(void* clientDataVoid) {
                     sprintf(n, "%d", i+1);
                     strcat(users, n);
                     strcat(users, "->");
-                    printf("%s", users);
+                    //printf("%s", users);
                     strcat(users, item->nick_name == NULL ? "NULL": item->nick_name);
-                    printf("%s", users);
+                    //printf("%s", users);
                     if (item == clientData) {
                         strcat(users, "(Это вы)");
                     }
@@ -456,44 +456,8 @@ int communication_client(void* clientDataVoid) {
             if (NICK_NAME != request.type) {
                 free(request.send_nick_name);
             }
-        } 
-
-        
+        }         
     }
-
-
-
-    //Try{
-        /*do {/*
-            //Try {
-                sleep(1);            
-                /*snprintf(third, sizeof third, "%s %d\n", mess, i);*/   
-                /*printf("result: %d\n", result);*/         
-                /*result = send( clientData->socket_id, mess, sizeof(mess), MSG_NOSIGNAL, (struct sockaddr *)&addr, sizeof(addr));
-                if (result < 0) {
-                   printf("Клиент %s отключен\n", clientData->nick_name); 
-                   break;
-                }*/
-                
-            //};
-            /*Catch(e) {
-                printf("Возникла ошибка: %d\n", e);
-            }*/
-            
-            /*i++;*/
-        /*} while (i<5);*/
-    /*}
-    Catch(e) {
-        printf("Возникла ошибка: %d\n", e);
-    }*/
-
-    /*
-    sendto( clientData->socket_id, mess, sizeof(mess), 0, (struct sockaddr *)&addr, sizeof(addr));
-    sendto( clientData->socket_id, mess, sizeof(mess), 0, (struct sockaddr *)&addr, sizeof(addr));
-    sendto( clientData->socket_id, mess, sizeof(mess), 0, (struct sockaddr *)&addr, sizeof(addr));
-    sendto( clientData->socket_id, mess, sizeof(mess), 0, (struct sockaddr *)&addr, sizeof(addr));
-    */
-
 };
 
 int sent(void* var) {
@@ -590,160 +554,6 @@ int main(int argc, char **argv)
     free(thread);
     free(thread2);
 
-
-
-
-    
-
-
-      /*создаём сокет*/
-      /*int ss = socket(AF_INET, SOCK_STREAM, 0);
-      int* s = &ss;
-      if( *s < 0)
-      {
-              perror("Error calling socket");
-              return 0;
-      }*/
-
-      /*определяем прослушиваемый порт и адрес*/
-      /*struct sockaddr_in addr;
-      addr.sin_family = AF_INET;
-      addr.sin_port = htons(18666);
-      addr.sin_addr.s_addr = htonl(INADDR_ANY);
-      if( bind(*s, (struct sockaddr *)&addr, sizeof(addr)) < 0 )
-      {
-              perror("Error calling bind");
-              return 0;
-      }*/
-
-      /*помечаем сокет, как пассивный - он будет слушать порт*/
-      /*if( listen(*s, 5) )
-      {
-              perror("Error calling listen");
-              return 0;
-      }*/
-/*
-      char read[30];
-      printf("dddddddddddddddd");
-      gets(read);
-
-      printf("%s\n", read);*/
-
-        //clients = {10, malloc(10 * sizeof(struct client_data))};
-
-        /*clients.size = 10;
-        clients.count = 0;
-        clients.array = malloc(clients.size * sizeof(struct client_data));*/
-        //10, malloc(10 * sizeof(struct client_data))};
-
-        /*clients = all_client_data_constructor(1);
-
-        //clients_data = malloc()
-        pthread_t* thread = (pthread_t*) malloc(sizeof(pthread_t));
-        pthread_t* thread2 = (pthread_t*) malloc(sizeof(pthread_t));
-        printf("main %d %p \n", clients.size, clients.array);
-
-        pthread_create(thread, NULL, my_listen,  NULL);
-        pthread_create(thread2, NULL, sent,  NULL);
-
-        //int status_addr;
-        pthread_join(*thread, NULL);
-        pthread_join(*thread2, NULL);*/
-        /*char read[30];
-        gets(read);
-        printf("main2\n");*/
-
-        /*начинаем слушать, для соединения создаём другой сокет, в котором можем общаться.*/
-        //int s1 = accept(s, NULL, NULL);
-
         return 0;
-/*
-        if( s1 < 0 )
-        {
-             perror("Error calling accept");
-             return 0;
-        }
 
-
-        //читаем данные из сокета
-        char buffer[31];
-        int counter = 0;
-        for(;;)
-        {
-             // char mess[] = "lslslslslslslslslslsl";
-             // send(s1,mess,sizeof(mess), 0);
-              memset(buffer, 0, sizeof(char)*31);
-              //следует помнить, что данные поступают неравномерно
-              int rc = recv(s1, buffer, 30, 0);
-              printf("%s\n", "dfdfdfdfdf");
-              
-              char mess[] = "lslslslslslslslslslsl";
-              send(s1,mess,sizeof(mess), 0);
-
-              printf("%d\n", rc);
-              if( rc < 0 )
-              {
-                      //чтение может быть прервано системным вызовом, это нормально
-                      if( errno == EINTR )
-                              continue;
-                      perror("Can't receive data.");
-                      return 0;
-              }
-              if( rc == 0 )
-                      break;
-              printf("%s\n", buffer);
-        }
-        char response[] = "Hi, dear!";
-        if( sendto( s1, response, sizeof(response), 0, (struct sockaddr *)&addr, sizeof(addr) ) < 0 )
-                perror("Error sending response");
-        printf("Response send\n");
-        return 0;*/
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*#include <stdio.h>
-#include <stdlib.h>
-
-/*using namespace std;*/
-
-/*int main() {
-    int *p;
-    int *t;
-    printf("%d", 6);
-    for (int j = 0; j < 1000; j++) {
-
-        for (unsigned long long i = 0; i < 10000; i++ ){
-            for (int jj = 0; jj < 1; jj++){
-                p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                            p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                p = (int *)malloc(sizeof(int));
-                t = (int *)malloc(sizeof(int));
-                *p = 0;
-                *t = 0;
-            }
-            
-        }
-        printf("%d", j);
-    }*/
-
-    /*cout << "Hello world" << endl;*/
-
-/*}*/

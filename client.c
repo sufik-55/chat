@@ -328,41 +328,6 @@ void send_message(enum message_type type, char * message, char * name) {
 
 int main(int argc, char * argv[])
 {
-    /*char* fff;
-    printf("%p\n", fff);
-    fff = "ggg"; 
-    printf("%p\n", fff);
-    fff = "ggg"; 
-    printf("%p\n", fff);
-    
-    fff = malloc(3);
-    fff[0] = 'g'; 
-    fff[1] = 'g'; 
-    fff[2] = 'g'; 
-    printf("malloc %p\n", fff);
-    //fff = "ggg5";
-    printf("%p\n", fff);
-
-    free(fff);
-    printf("free %p\n", fff);
-    //free(fff);
-    if (NULL == "") {
-        printf("free %s\n", "true");
-    }
-    else {
-        printf("free %s\n", "false");
-    }
-
-    if (NULL == NULL) {
-        printf("free %s\n", "true");
-    }
-    else {
-        printf("free %s\n", "false");
-    }
-
-    printf("free %s\n", NULL);
-
-    return 0;*/
 
     socet_ID = socket( AF_INET, SOCK_STREAM, 0 );
     if(socet_ID < 0)
@@ -375,7 +340,17 @@ int main(int argc, char * argv[])
     struct sockaddr_in peer;
     peer.sin_family = AF_INET;
     peer.sin_port = htons( 18666 );
-    peer.sin_addr.s_addr = inet_addr( "127.0.0.1" );
+    if (argc == 3) {
+        
+        if (strcmp("--addres", argv[1]) == 0) {
+            peer.sin_addr.s_addr = inet_addr( argv[2] );
+        }
+    }
+    else 
+    {
+        peer.sin_addr.s_addr = inet_addr( "127.0.0.1" );        
+    }
+
     int result = connect( socet_ID, ( struct sockaddr * )&peer, sizeof( peer ) );
     if( result )
     {
@@ -400,116 +375,4 @@ int main(int argc, char * argv[])
     return 0;
 
 
-      /*объявляем сокет*/
-      /*int s = socket( AF_INET, SOCK_STREAM, 0 );
-      if(s < 0)
-      {
-              perror( "Error calling socket" );
-              return 0;
-      }*/
-
-      /*соединяемся по определённому порту с хостом*/
-      /*struct sockaddr_in peer;
-      peer.sin_family = AF_INET;
-      peer.sin_port = htons( 18666 );
-      peer.sin_addr.s_addr = inet_addr( "127.0.0.1" );
-      int result = connect( s, ( struct sockaddr * )&peer, sizeof( peer ) );
-      if( result )
-      {
-              perror( "Error calling connect" );
-              return 0;
-      }*/
-
-      /*посылаем данные
-       *
-       * Если быть точным, данные не посланы, а записаны где-то в стеке, когда и как они будут
-       * отправлены реализации стека TCP/IP виднее. Зато мы сразу получаем управление, не
-       * дожидаясь у моря погоды.*/
-      //char buf[] = "Hello, world!";
-      //result = send( s, "Hello, sufik!", 13, 0);
-      //printf("%d result\n", result);
-      /*if( result <= 0 )
-      {
-              perror( "Error calling send" );
-              return 0;
-      }*/
-      /* закрываем соединения для посылки данных */
-     /* int shutdownResult = shutdown(s, 1);
-      printf("%d shutdownResult\n", shutdownResult);
-      if( shutdownResult < 0)
-      {
-              perror("Error calling shutdown");
-              return 0;
-      }*/
-
-      /* читаем ответ сервера */
-      /*fd_set readmask;
-      fd_set allreads;
-      FD_ZERO( &allreads );
-      FD_SET( 0, &allreads );
-      FD_SET( s, &allreads );
-      for(;;)
-      {*/
-              //printf("result\n");
-              /*readmask = allreads;
-              if( select(s + 1, &readmask, NULL, NULL, NULL ) <= 0 )
-              {
-                      perror("Error calling select");
-                      return 0;
-              }
-              if( FD_ISSET( s, &readmask ) )
-              {*/
-                    //printf("\n");
-                      /*char buffer[256];
-                      bzero(buffer, 256);
-                      //memset(buffer, 0, 50*sizeof(char));
-                      int result = recv( s, buffer, sizeof(buffer) - 1, 0);
-                        if( result < 0 )
-                        {
-                            perror("Error calling recv");
-                            return 0;
-                        }
-                        if( result == 0 )
-                        {
-                            perror("Server disconnected");
-                            return 0;
-                        }
-                        if(strncmp(buffer, "Hi, dear!", 9) == 0)
-                            printf("Got answer. Success.\n");
-                        else {
-                            
-                            if (strncmp(buffer, "Введите Nick Name:\n", 9) == 0) {
-                                printf("%s",buffer);
-                                bzero(buffer, 256);
-                                char read[256];
-                                gets(read);
-
-                                struct message_data m = {NICK_NAME, read, "Sufik" };
-                                char* sendData = Serialize(&m);
-                                result = send( s, sendData, 255, MSG_NOSIGNAL);
-                                if (result < 0) {
-                                    printf("Ошибка");
-                                }
-                                free(sendData);
-
-                                message_data_show(&m);
-                                //printf("%d\n",result);
-                                //printf("%s\n",read);
-
-                            }
-                        }
-                      //printf("%s\n",buffer);
-              /*}
-              if( FD_ISSET( 0, &readmask ) )
-              {
-                      printf( "No server response" );
-                      return 0;
-              }*/
-
-                /*char buffer[20];
-                int result = recv( s, buffer, sizeof(buffer) - 1, 0 );
-
-              printf(buffer);*/
-      /*}
-      return 0;*/
 }
